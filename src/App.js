@@ -4,20 +4,35 @@ import './App.css';
 import NavBar from "./components/NavBar/index";
 import Jumbotron from "./components/Jumbotron/index";
 import ImageCard from "./components/Cards/index";
-import friends from "./images.json";
+import characters from "./characters.json";
+
+let clickedArr = []
 
 class App extends Component {
 
   state = {
-    friends: friends,
+    characters,
     currentScore: 0,
-    topScore: 0
+    topScore: 0,
   };
 
-  testChange(event) {
-    event.preventDefault();
-    alert("it worked");
-  }
+  clickCount = (id) => {
+    if (!clickedArr.includes(id)) {
+      clickedArr.push(id);
+      alert("nice");
+      console.log(clickedArr);
+      this.setState({ currentScore: this.state.currentScore + 1 });
+      this.state.characters.sort(() => Math.random() - 0.5);
+    } else {
+      alert("already clicked them");
+      if (this.state.currentScore >= this.state.topScore) {
+        this.setState({ topScore: this.state.currentScore});
+      }
+      this.setState({ currentScore: 0 });
+      clickedArr = []
+      this.state.characters.sort(() => Math.random() - 0.5);
+    }
+  };
 
   render() {
     return (
@@ -27,18 +42,16 @@ class App extends Component {
         topScore={this.state.topScore}
         />
         <Jumbotron />
-        <ImageCard
-          image={friends[0].image}
-          onChange={this.testChange}
-        />
-        <ImageCard
-          image={friends[1].image}
-          onClick={this.testChange}
-        />
-        <ImageCard
-          image={friends[2].image}
-          testChange={this.testChange}
-        />
+        <div className="row">
+          {this.state.characters.map(character => 
+            <ImageCard
+              clickCount={this.clickCount}
+              image={character.image}
+              id={character.id}
+              key={character.id}
+            />
+          )}
+        </div>
       </div>
     );
   }
