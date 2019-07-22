@@ -38,19 +38,21 @@ class App extends Component {
     return (
       <div>
         <NavBar 
-        currentScore={this.state.currentScore}
-        topScore={this.state.topScore}
+          currentScore={this.state.currentScore}
+          topScore={this.state.topScore}
         />
         <Jumbotron />
-        <div className="row">
-          {this.state.characters.map(character => 
-            <ImageCard
-              clickCount={this.clickCount}
-              image={character.image}
-              id={character.id}
-              key={character.id}
-            />
-          )}
+        <div className="container">
+          <div className="row">
+            {this.state.characters.map(character => 
+              <ImageCard
+                clickCount={this.clickCount}
+                image={character.image}
+                id={character.id}
+                key={character.id}
+              />
+            )}
+          </div>
         </div>
       </div>
     );

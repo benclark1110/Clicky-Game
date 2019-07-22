@@ -3,7 +3,7 @@ import "./style.css";
 
 function ImageCard(props) {
   return (
-    <div className="card col-sm col-md col-lg" onClick={() => props.clickCount(props.id)}>
+    <div className="card col-sm-6 col-md-3 col-lg-3 col-xl-3" onClick={() => props.clickCount(props.id)}>
       <div className="img-container">
         <img  className="image" 
               alt={props.name} 
