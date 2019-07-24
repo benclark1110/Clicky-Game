@@ -14,17 +14,18 @@ class App extends Component {
     characters,
     currentScore: 0,
     topScore: 0,
+    language: "Click an image to begin!"
   };
 
   clickCount = (id) => {
     if (!clickedArr.includes(id)) {
       clickedArr.push(id);
-      alert("nice");
+      this.setState({ language: "You guessed correctly!"});
       console.log(clickedArr);
       this.setState({ currentScore: this.state.currentScore + 1 });
       this.state.characters.sort(() => Math.random() - 0.5);
     } else {
-      alert("already clicked them");
+      this.setState({ language: "You guessed incorrectly!"});
       if (this.state.currentScore >= this.state.topScore) {
         this.setState({ topScore: this.state.currentScore});
       }
@@ -40,6 +41,7 @@ class App extends Component {
         <NavBar 
           currentScore={this.state.currentScore}
           topScore={this.state.topScore}
+          language={this.state.language}
         />
         <Jumbotron />
         <div className="container">
